@@ -1,22 +1,22 @@
 import {api, requestConfig} from "../utils/config";
 
-const GetAllHosts = async () => {
+const GetAllPackages = async () => {
     const config = requestConfig("GET", null);
     try {
-        const res = await fetch(api + "/hosts/", config)
+        const res = await fetch(api + "/packages/", config)
             .then(res => res.json())
             .catch((e) => e);
         return res;
-    }catch (e) {
+    }catch (e){
         console.log(e)
     }
 }
 
-const CreateHosts = async (data) => {
+const CreatePackages = async (data) => {
     const config = requestConfig("POST", data);
 
     try {
-        const res = await fetch(api + "/hosts/", config)
+        const res = await fetch(api + "/packages/", config)
             .then(res => res.json())
             .catch((e) => e);
         return res;
@@ -25,9 +25,9 @@ const CreateHosts = async (data) => {
     }
 }
 
-const HostsService = {
-    GetAllHosts,
-    CreateHosts
+const PackagesService = {
+    GetAllPackages,
+    CreatePackages
 }
 
-export default HostsService;
+export default PackagesService;

@@ -1,17 +1,19 @@
 import {Button, Table} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {GetHosts} from "../../slices/HostsSlice";
 import {deleteHost} from "../../slices/HostSlice";
 import UpdateHost from "../host/UpdateHost";
 import CreateHosts from "./CreateHosts";
-import ViewPackagesUpgradable from "../packages/ViewPackagesUpgradable";
+import {GetPackages} from "../../slices/PackagesSlice";
+import ViewPackagesUpgradable from "./ViewPackagesUpgradable";
 
-const ListHosts = () => {
+const ListPackages = () => {
 
     const dispatch = useDispatch();
 
-    const {getHosts: newData, success} = useSelector((state) => state.hosts);
+    const {getPackages: getData, success} = useSelector((state) => state.packages);
+
+
 
     const [res, setRes] = useState(false);
     const [response, setResponse] = useState(false);
@@ -35,13 +37,13 @@ const ListHosts = () => {
         }
     }, [res])
     useEffect(() => {
-        dispatch(GetHosts());
+        dispatch(GetPackages());
         setResponse(false);
         }, [response]
     )
 
     useEffect(() => {
-        dispatch(GetHosts());
+        dispatch(GetPackages());
     }, [dispatch]);
 
     return (
@@ -58,27 +60,18 @@ const ListHosts = () => {
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Hostname</th>
-                        <th>IPv4</th>
-                        <th>MAC Address</th>
-                        <th>Packages</th>
-                        <th>Pack. Hold</th>
-                        <th>Pack. Upgradable</th>
+                        <th>Name</th>
+                        <th>Version</th>
                         <th colSpan={3}>Ações</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {newData && newData !== null && newData.map((data)=>(
+                    {getData && getData !== null && getData.map((data)=>(
                         <tr key={data.id}>
                             <td>{data.id}</td>
-                            <td>{data.hostname}</td>
-                            <td>{data.ipv4}</td>
-                            <td>{data.macaddress}</td>
-                            <td>{data.packages.length}</td>
-                            <td>{data.packages_hold.length}</td>
-                            <td>{data.packages_upgradable.length}</td>
+                            <td>{data.name}</td>
+                            <td>{data.version}</td>
                             <td><UpdateHost id={data.id} childUpdateList={childUpdateList}/></td>
-                            <td><ViewPackagesUpgradable dataHost={data}/></td>
                             <td><Button variant="danger btn-sm" onClick={(e) => {handleDelete(e, data.id)}}>Deletar</Button></td>
                         </tr>
                     ))}
@@ -90,4 +83,4 @@ const ListHosts = () => {
     );
 }
 
-export default ListHosts;
+export default ListPackages;

@@ -1,35 +1,35 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import HostsService from "../services/HostsService";
+import PackagesService from "../services/PackagesService";
 
 const initialState = {
-    host: {},
-    getHosts: null,
+    Package: {},
+    getPackages: null,
     success: false,
     error: false,
     message: null,
     loading: false
 }
 
-export const GetHosts = createAsyncThunk(
-    "hosts/getAll",
-    async (hosts, thunkAPI) => {
-        const data = await HostsService.GetAllHosts();
+export const GetPackages = createAsyncThunk(
+    "packages/getAll",
+    async (Packages, thunkAPI) => {
+        const data = await PackagesService.GetAllPackages();
         return data;
     }
 )
 
-export const createHosts = createAsyncThunk(
-    "hosts/create",
-    async (hosts, thunkAPI) => {
-        const data = await HostsService.CreateHosts(hosts);
+export const createPackages = createAsyncThunk(
+    "packages/create",
+    async (Packages, thunkAPI) => {
+        const data = await PackagesService.CreatePackages(Packages);
         return data;
     }
 )
 
 
-export const HostsSlice = createSlice(
+export const PackagesSlice = createSlice(
     {
-        name: "hosts",
+        name: "packages",
         initialState,
         reducers: {
             resetMessage: (state) => {
@@ -38,42 +38,42 @@ export const HostsSlice = createSlice(
         },
         extraReducers: (builder) => {
             builder
-                .addCase(GetHosts.pending, (state) => {
+                .addCase(GetPackages.pending, (state) => {
                     state.loading = true;
                     state.error = false;
                 })
-                .addCase(GetHosts.fulfilled, (state, action) => {
+                .addCase(GetPackages.fulfilled, (state, action) => {
                     state.loading = false;
                     state.error = null;
                     state.success = true;
-                    state.getHosts = action.payload;
+                    state.getPackages = action.payload;
                 })
-                .addCase(GetHosts.rejected, (state, action) => {
+                .addCase(GetPackages.rejected, (state, action) => {
                     state.loading = false;
                     state.error = action.payload;
                     state.message = null;
-                    state.getHosts = null;
+                    state.getPackages = null;
                 })
-                .addCase(createHosts.pending, (state) => {
+                .addCase(createPackages.pending, (state) => {
                     state.loading = true;
                     state.error = false;
                 })
-                .addCase(createHosts.fulfilled, (state, action) => {
+                .addCase(createPackages.fulfilled, (state, action) => {
                     state.loading = false;
                     state.error = null;
                     state.success = true;
-                    state.host = action.payload;
+                    state.Package = action.payload;
                 })
-                .addCase(createHosts.rejected, (state, action) => {
+                .addCase(createPackages.rejected, (state, action) => {
                     state.loading = false;
                     state.error = action.payload;
                     state.message = null;
-                    state.host = null;
+                    state.Package = null;
                 })
         }
     }
 )
 
-export const {resetMessage} = HostsSlice.actions;
+export const {resetMessage} = PackagesSlice.actions;
 
-export default HostsSlice.reducer;
+export default PackagesSlice.reducer;
