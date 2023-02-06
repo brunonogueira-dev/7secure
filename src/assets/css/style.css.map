@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../scss/global/_global.scss","../scss/hosts/_hosts.scss"],"names":[],"mappings":"AAOA;EACE;;;ACRF;EACE;IACE;IACA","file":"style.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/global/_global.scss","../scss/hosts/_hosts.scss"],"names":[],"mappings":"AAOA;EACE;;;ACRF;EACE;EACA","file":"style.css"}
