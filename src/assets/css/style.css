@@ -1,0 +1,12 @@
+body {
+  background-color: #2B3036 !important;
+}
+
+@media screen and (max-width: 991px) {
+  .table-scroll {
+    overflow-x: scroll;
+    overflow-y: unset;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
